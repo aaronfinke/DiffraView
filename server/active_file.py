@@ -63,9 +63,9 @@ from dials.algorithms.spot_finding.factory import FilterRunner
 from dials.algorithms.spot_finding.finder import shoeboxes_to_reflection_table
 
 from dials_algorithms_tof_integration_ext import (
-    TOFProfile1DParams,
+    TOFProfile1DIBIXParams,
     TOFProfile3DGutmannParams,
-    TOFProfile3DICParams,
+#    TOFProfile3DICParams,
     calculate_line_profile_for_reflection,
     tof_calculate_ellipse_shoebox_mask,
     tof_calculate_seed_skewness_shoebox_mask,
