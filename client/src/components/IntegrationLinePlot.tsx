@@ -425,7 +425,7 @@ return (
           <SelectContent>
             <SelectGroup>
               <SelectItem value="summation">Summation</SelectItem>
-              <SelectItem value="profile_1d">1D</SelectItem>
+              <SelectItem value="profile_1d_ibix">1D</SelectItem>
               <SelectItem value="profile_3d_gutmann">3D Gutmann</SelectItem>
               <SelectItem value="profile_3d_ic">3D Ikeda Carpenter</SelectItem>
             </SelectGroup>
@@ -510,7 +510,7 @@ return (
           style={{ borderColor: ellipseMaskScaleValid ? "" : "red" }}
         />
       </div>
-      <div className="max-w-[80px]" hidden={integrateMethod!=="profile_1d"}>
+      <div className="max-w-[80px]" hidden={integrateMethod!=="profile_1d_ibix"}>
         <UILabel>Init α</UILabel>
         <Input
           placeholder="0.03"
@@ -519,7 +519,7 @@ return (
           style={{ borderColor: profile1DAlphaValid ? "" : "red" }}
         />
       </div>
-      <div className="max-w-[80px]" hidden={integrateMethod!=="profile_1d"}>
+      <div className="max-w-[80px]" hidden={integrateMethod!=="profile_1d_ibix"}>
         <UILabel>Init β</UILabel>
         <Input
           placeholder="0.03"
@@ -528,7 +528,7 @@ return (
           style={{ borderColor: profile1DBetaValid ? "" : "red" }}
         />
       </div>
-      <div className="max-w-[90px]" hidden={integrateMethod!=="profile_1d"}>
+      <div className="max-w-[90px]" hidden={integrateMethod!=="profile_1d_ibix"}>
         <UILabel>Num Restarts</UILabel>
         <Input
           placeholder="5000"

@@ -589,7 +589,7 @@ class DIALSServer:
         profile_mask_data = None
         profile_mask_data_2d = None
 
-        if integration_method == "profile_1d":
+        if integration_method == "profile_1d_ibix":
             line_profile = np.array(results["line_profile"])
             integration_profiler_params["lineProfile1D"] = tuple(line_profile)
             integration_profiler_params["profile1DValue"] = fit_intensity
@@ -688,7 +688,7 @@ class DIALSServer:
         else:
             heatmap_params["shoeboxMaskEllipse2D"] = mask_data_2d
 
-        if integration_method == "profile_1d":
+        if integration_method == "profile_1d_ibix":
             heatmap_params["shoeboxMaskProfile1D2D"] = profile_mask_data_2d
         elif integration_method in ("profile_3d_gutmann", "profile_3d_ic"):
             heatmap_params["shoeboxMaskProfile3D2D"] = profile_mask_data_2d

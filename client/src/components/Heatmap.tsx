@@ -39,7 +39,7 @@ export function HeatMap() {
       case "seed_skewness":
         mask = shoeboxMaskSeedSkewness2D;
         break;
-      case "profile_1d":
+      case "profile_1d_ibix":
         mask = shoeboxMaskProfile1D2D;
         break;
       case "profile_3d_gutmann":

@@ -238,7 +238,7 @@ export function IntegrateTab() {
     let integrationMethod = "";
     switch (integrateMethod) {
       case "summation": integrationMethod = "summation"; break;
-      case "profile_1d": integrationMethod = "profile_1d"; break;
+      case "profile_1d_ibix": integrationMethod = "profile_1d_ibix"; break;
       case "profile_3d_gutmann": integrationMethod = "profile_3d_gutmann"; break;
       // case "profile_3d_ic": integrationMethod = "profile_3d_ic"; break;
     }
@@ -287,7 +287,7 @@ export function IntegrateTab() {
     let methodValue = "";
     switch (integrateMethod) {
       case "summation": methodValue = "summation"; break;
-      case "profile_1d": methodValue = "profile_1d"; break;
+      case "profile_1d_ibix": methodValue = "profile_1d_ibix"; break;
       case "profile_3d_gutmann": methodValue = "profile_3d_gutmann"; break;
       // case "profile_3d_ic": methodValue = "profile_3d_ic"; break;
 
@@ -502,7 +502,7 @@ export function IntegrateTab() {
                 <SelectContent>
                   <SelectGroup>
                     <SelectItem value="summation">Summation</SelectItem>
-                    <SelectItem value="profile_1d">1D Profile Fit</SelectItem>
+                    <SelectItem value="profile_1d_ibix">1D Profile Fit</SelectItem>
                     <SelectItem value="profile_3d_gutmann">3D Profile Fit (Gutmann)</SelectItem>
                     {/* <SelectItem value="profile_3d_ic">3D Profile Fit (Ikeda-Carpenter)</SelectItem> */}
                   </SelectGroup>

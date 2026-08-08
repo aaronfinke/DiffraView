@@ -2283,7 +2283,8 @@ class ActiveFile:
         image_size = expt.detector[0].get_image_size()
         tof_size = len(expt.scan.get_property("time_of_flight"))
         image_range = (0, image_size[0], 0, image_size[1], 0, tof_size)
-        partiality = compute_partiality(bbox, image_range, new_centroid)
+        # partiality = compute_partiality(bbox, image_range, new_centroid)
+        partiality = compute_partiality(bbox, image_range)
         refl["partiality"] = flex.double(1, partiality)
 
         mask_model = msg["mask_model"]
@@ -2437,11 +2438,11 @@ class ActiveFile:
             overall_results["sum_sigma"] = np.sqrt(sum_variance)
             overall_results["success"] = success
 
-        elif integration_method == "profile_1d":
-            alpha_min = _phil_defaults.profile_1d.min_alpha
-            alpha_max = _phil_defaults.profile_1d.max_alpha
-            beta_min = _phil_defaults.profile_1d.min_beta
-            beta_max = _phil_defaults.profile_1d.max_beta
+        elif integration_method == "profile_1d_ibix":
+            alpha_min = _phil_defaults.profile_1d_ibix.min_alpha
+            alpha_max = _phil_defaults.profile_1d_ibix.max_alpha
+            beta_min = _phil_defaults.profile_1d_ibix.min_beta
+            beta_max = _phil_defaults.profile_1d_ibix.max_beta
             A = float(msg["profile_1d_A"])
             alpha = float(msg["profile_1d_alpha"])
             beta = float(msg["profile_1d_beta"])
