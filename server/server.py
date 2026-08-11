@@ -599,9 +599,9 @@ class DIALSServer:
                     shoebox, line_profile
                 )
             )
-            integrate_params["profile1DAlpha"] = round(results["profile_1d_alpha"], 3)
-            integrate_params["profile1DBeta"] = round(results["profile_1d_beta"], 3)
-            integrate_params["profile1DA"] = round(results["profile_1d_A"], 3)
+            integrate_params["profile1DAlpha"] = round(results["profile1d_alpha"], 3)
+            integrate_params["profile1DBeta"] = round(results["profile1d_beta"], 3)
+            integrate_params["profile1DA"] = round(results["profile1d_A"], 3)
 
         elif integration_method == "profile_3d_gutmann":
             line_profile_3d = flumpy.to_numpy(results["profile_3d_gutmann"]).sum(

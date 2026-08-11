@@ -251,10 +251,10 @@ export function IntegrationLinePlot() {
       "channel": "server",
       "command": "update_integration_profiler",
       "reflection_id": selectedReflectionID,
-      "profile_1d_alpha": profile1DAlphaRef.current,
-      "profile_1d_beta": profile1DBetaRef.current,
-      "profile_1d_A": 1.0,
-      "profile_1d_n_restarts": profile1DNRestartsRef.current,
+      "profile1d_alpha": profile1DAlphaRef.current,
+      "profile1d_beta": profile1DBetaRef.current,
+      "profile1d_A": 1.0,
+      "profile1d_n_restarts": profile1DNRestartsRef.current,
       "profile_3d_gutmann_n_restarts": profile3DGutmannNRestartsRef.current,
       "profile_3d_gutmann_alpha": profile3DGutmannAlphaRef.current,
       "profile_3d_gutmann_beta": profile3DGutmannBetaRef.current,
@@ -427,7 +427,7 @@ return (
               <SelectItem value="summation">Summation</SelectItem>
               <SelectItem value="profile_1d_ibix">1D</SelectItem>
               <SelectItem value="profile_3d_gutmann">3D Gutmann</SelectItem>
-              <SelectItem value="profile_3d_ic">3D Ikeda Carpenter</SelectItem>
+              {/* <SelectItem value="profile_3d_ic">3D Ikeda Carpenter</SelectItem> */}
             </SelectGroup>
           </SelectContent>
         </Select>

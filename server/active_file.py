@@ -67,6 +67,7 @@ from dials_algorithms_tof_integration_ext import (
     TOFProfile3DGutmannParams,
 #    TOFProfile3DICParams,
     calculate_line_profile_for_reflection,
+    calculate_line_profile_for_reflection_3d,
     tof_calculate_ellipse_shoebox_mask,
     tof_calculate_seed_skewness_shoebox_mask,
 )
@@ -2443,10 +2444,10 @@ class ActiveFile:
             alpha_max = _phil_defaults.profile_1d_ibix.max_alpha
             beta_min = _phil_defaults.profile_1d_ibix.min_beta
             beta_max = _phil_defaults.profile_1d_ibix.max_beta
-            A = float(msg["profile_1d_A"])
-            alpha = float(msg["profile_1d_alpha"])
-            beta = float(msg["profile_1d_beta"])
-            n_restarts = int(msg["profile_1d_n_restarts"])
+            A = float(msg["profile1d_A"])
+            alpha = float(msg["profile1d_alpha"])
+            beta = float(msg["profile1d_beta"])
+            n_restarts = int(msg["profile1d_n_restarts"])
             optimize_profile = bool(msg["optimize_profile"])
             debug_output = True
             if not optimize_profile:
@@ -2455,7 +2456,7 @@ class ActiveFile:
                 beta_min = 0.0
                 beta_max = beta + 1
 
-            profile_params = TOFProfile1DParams(
+            profile_params = TOFProfile1DIBIXParams(
                 A,
                 alpha,
                 alpha_min,
@@ -2519,9 +2520,9 @@ class ActiveFile:
             overall_results["sum_sigma"] = np.sqrt(sum_variance)
             overall_results["success"] = success
             overall_results["line_profile"] = line_profile
-            overall_results["profile_1d_alpha"] = profile_params.alpha
-            overall_results["profile_1d_beta"] = profile_params.beta
-            overall_results["profile_1d_A"] = profile_params.A
+            overall_results["profile1d_alpha"] = profile_params.alpha
+            overall_results["profile1d_beta"] = profile_params.beta
+            overall_results["profile1d_A"] = profile_params.A
 
         elif integration_method == "profile_3d_gutmann":
             alpha_min = _phil_defaults.profile_3d_gutmann.min_alpha
@@ -2553,47 +2554,20 @@ class ActiveFile:
             tof_z = fti(z)
             tof_coords = flex.vec3_double(x, y, flumpy.from_numpy(tof_z))
 
-            if applying_incident:
-                if applying_absorption:
-                    result = calculate_line_profile_for_reflection(
-                        refl,
-                        expt,
-                        data,
-                        incident_params,
-                        absorption_params,
-                        projected_raw_intensity,
-                        projected_corrected_intensity,
-                        projected_background,
-                        tof,
-                        apply_lorentz,
-                        profile_params,
-                    )
-                else:
-                    result = calculate_line_profile_for_reflection(
-                        refl,
-                        expt,
-                        data,
-                        incident_params,
-                        projected_raw_intensity,
-                        projected_corrected_intensity,
-                        projected_background,
-                        tof,
-                        apply_lorentz,
-                        profile_params,
-                    )
-            else:
-                result = calculate_line_profile_for_reflection(
-                    refl,
-                    expt,
-                    data,
-                    tof_coords,
-                    projected_raw_intensity,
-                    projected_corrected_intensity,
-                    projected_background,
-                    tof,
-                    apply_lorentz,
-                    profile_params,
-                )
+            # Only a single overload exists for the 3D fit; incident spectrum
+            # and absorption corrections are not supported by it.
+            result = calculate_line_profile_for_reflection_3d(
+                refl,
+                expt,
+                data,
+                tof_coords,
+                projected_raw_intensity,
+                projected_corrected_intensity,
+                projected_background,
+                tof,
+                apply_lorentz,
+                profile_params,
+            )
 
             prf_intensity, _, sum_intensity, sum_variance, success, profile_3d = result
             overall_results["prf_intensity"] = prf_intensity
@@ -2606,6 +2580,11 @@ class ActiveFile:
             overall_results["profile_3d_gutmann_beta"] = profile_params.beta
 
         elif integration_method == "profile_3d_ic":
+            raise NotImplementedError(
+                "The 3D Ikeda-Carpenter profile is not available in this DIALS "
+                "build (no TOFProfile3DICParams in "
+                "dials_algorithms_tof_integration_ext)."
+            )
             init_A = float(msg["profile_3d_ic_init_A"])
             init_B = float(msg["profile_3d_ic_init_B"])
             n_restarts = int(msg["profile_3d_ic_n_restarts"])
